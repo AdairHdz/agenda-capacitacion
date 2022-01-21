@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     use HasFactory;
+
+
+    public function phoneNumbers()
+    {
+        return $this->hasMany(PhoneNumber::class);
+    }
+
 }
