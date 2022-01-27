@@ -58,6 +58,17 @@ class ContactController extends Controller
 
         $createdContact->phoneNumbers()->createMany($filledPhoneNumbers);
 
-        return redirect()->route("contacts.index");
+        return redirect()->route("contacts.index")->with("successMessage", "Contacto guardado correctamente");
+    }
+
+    function edit($contactId)
+    {
+        $retrievedContact = Contact::find($contactId);
+        return view("pages.create-contact")->with("retrievedContact", $retrievedContact);
+    }
+
+    function destroy()
+    {
+
     }
 }

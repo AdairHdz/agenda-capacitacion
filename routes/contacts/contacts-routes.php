@@ -12,4 +12,10 @@ Route::name("contacts.")->group(function() {
 
     Route::post("/contacts", [ContactController::class, "store"])
         ->name("store");
+
+    Route::get("/contacts/{contactId}/edit", [ContactController::class, "edit"])
+        ->name("edit")->whereNumber("contactId");
+    
+    Route::get("/contacts/{contactId}", [ContactController::class, "destroy"])
+        ->name("destroy");
 });

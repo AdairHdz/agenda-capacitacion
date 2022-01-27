@@ -10,7 +10,7 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label for="firstName">Nombre(s)</label>
-                            <input type="text" name="firstName" id="firstName" value="" class="form-control">
+                            <input type="text" name="firstName" id="firstName" value="{{ isset($retrievedContact) ? $retrievedContact->first_name : '' }}" class="form-control">
                             @error("firstName")
                             <p class="text-danger"> {{ $message }} </p>
                             @enderror
