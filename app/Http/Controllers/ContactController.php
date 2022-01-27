@@ -6,12 +6,21 @@ use App\Http\Requests\StoreContactRequest;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\PhoneNumber;
+use Illuminate\Support\Facades\Session;
 
 class ContactController extends Controller
 {
     function index()
     {
         $retrievedContacts = Contact::all();
+        $successMessage = Session::get("successMessage");
+        if(isset($successMessage)) {
+            return view("pages.home", [
+                "successMessage" => $successMessage,
+                "retrievedContacts" => $retrievedContacts
+            ]);
+        }
+        
         return view("pages.home", [
             "retrievedContacts" => $retrievedContacts
         ]);
@@ -52,13 +61,13 @@ class ContactController extends Controller
         $createdContact->first_name = $firstName;
         $createdContact->middle_name = $middleName;
         $createdContact->last_name = $lastName;
-        $createdContact->birth_date = $birthDate;
+        $createdContact->birth_date = $parsedDate;
         $createdContact->email_address = $emailAddress;
         $createdContact->save();
 
         $createdContact->phoneNumbers()->createMany($filledPhoneNumbers);
 
-        return redirect()->route("contacts.index")->with("successMessage", "Contacto guardado correctamente");
+        return redirect()->route("contacts.index")->with("successMessage", "Contacto guardado correctamente");        
     }
 
     function edit($contactId)
@@ -67,8 +76,12 @@ class ContactController extends Controller
         return view("pages.create-contact")->with("retrievedContact", $retrievedContact);
     }
 
-    function destroy()
+    function destroy($contactId)
     {
-
+        $retrievedContact = Contact::find($contactId);
+        $retrievedContact->delete();
+        return redirect()
+            ->route("contacts.index")
+            ->with("successMessage", "Contacto correctamente eliminado");
     }
 }

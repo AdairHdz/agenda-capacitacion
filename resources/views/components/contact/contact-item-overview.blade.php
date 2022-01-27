@@ -1,0 +1,17 @@
+<div class="row border bg-white">
+    <div class="col-12 flex flex-column flex-md-row justify-around p-5">
+        <div class="flex flex-grow-1">
+            <div class="d-none d-md-flex justify-center align-items-center rounded-circle text-white text-center bg-primary mr-3 h3" style="height: 80px; width: 80px;">
+                X
+            </div>
+            <div class="align-self-center">
+                <strong class="fw-bolder mb-0"> X </strong>
+                <p class="fst-italic mb-0"> X </p>
+            </div>
+        </div>
+        <div class="flex align-items-end ml-md-5">
+            <a href="{{ route('contacts.edit', 1) }}" class="btn btn-primary me-3"> Detalles </a>
+            <a href="{{ route('contacts.destroy', 1) }}" class="btn btn-danger"> Eliminar </a>
+        </div>
+    </div>
+</div>
