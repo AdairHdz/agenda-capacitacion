@@ -6,14 +6,19 @@ use Illuminate\View\Component;
 
 class ContactItemOverview extends Component
 {
+    public int $contactId;
+    public String $contactName;
+    public String $contactEmailAddress;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(int $contactId, String $contactName, String $contactEmailAddress)
     {
-        //
+        $this->contactId = $contactId;        
+        $this->contactName = $contactName;
+        $this->contactEmailAddress = $contactEmailAddress;
     }
 
     /**

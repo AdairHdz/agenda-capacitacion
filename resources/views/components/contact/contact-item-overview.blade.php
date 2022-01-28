@@ -2,11 +2,11 @@
     <div class="col-12 flex flex-column flex-md-row justify-around p-5">
         <div class="flex flex-grow-1">
             <div class="d-none d-md-flex justify-center align-items-center rounded-circle text-white text-center bg-primary mr-3 h3" style="height: 80px; width: 80px;">
-                X
+                {{ substr($contactName, 0, 1) }}
             </div>
             <div class="align-self-center">
-                <strong class="fw-bolder mb-0"> X </strong>
-                <p class="fst-italic mb-0"> X </p>
+                <strong class="fw-bolder mb-0"> {{ $contactName }} </strong>
+                <p class="fst-italic mb-0"> {{ $contactEmailAddress }} </p>
             </div>
         </div>
         <div class="flex align-items-end ml-md-5">

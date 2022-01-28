@@ -16,11 +16,12 @@
         <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 position-relative">
             @isset($retrievedContacts)
             @forelse ($retrievedContacts as $contact)
-            <x-contact.contact-item-overview />
+            <x-contact.contact-item-overview contactId="{{ $contact->id }}" contactName="{{ $contact->first_name . ' ' . $contact->middle_name . ' ' . $contact->last_name; }}" contactEmailAddress="{{ $contact->email_address }}" />
             @empty
             <p> No hay contactos </p>
             @endforelse
             @endisset
+            <x-generics.floating-button />            
         </div>
     </section>
 </x-layout.layout>
