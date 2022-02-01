@@ -21,7 +21,7 @@
             <p> No hay contactos </p>
             @endforelse
             @endisset
-            <x-generics.floating-button />            
+            <x-generics.floating-button href="{{ route('contacts.create') }}" />            
         </div>
     </section>
 </x-layout.layout>

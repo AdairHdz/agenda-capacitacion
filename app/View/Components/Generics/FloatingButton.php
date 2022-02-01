@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class FloatingButton extends Component
 {
+    public String $href;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($href)
     {
-        //
+        $this->href = $href;
     }
 
     /**

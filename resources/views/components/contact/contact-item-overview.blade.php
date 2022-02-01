@@ -10,8 +10,8 @@
             </div>
         </div>
         <div class="flex align-items-end ml-md-5">
-            <a href="{{ route('contacts.edit', 1) }}" class="btn btn-primary me-3"> Detalles </a>
-            <a href="{{ route('contacts.destroy', 1) }}" class="btn btn-danger"> Eliminar </a>
+            <a href="{{ route('contacts.edit', $contactId) }}" class="btn btn-primary me-3"> Detalles </a>
+            <a href="{{ route('contacts.destroy', $contactId) }}" class="btn btn-danger"> Eliminar </a>
         </div>
     </div>
 </div>

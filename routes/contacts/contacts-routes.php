@@ -15,6 +15,9 @@ Route::name("contacts.")->group(function() {
 
     Route::get("/contacts/{contactId}/edit", [ContactController::class, "edit"])
         ->name("edit")->whereNumber("contactId");
+
+    Route::put("/contacts/{contactId}", [ContactController::class, "update"])
+        ->name("update");
     
     Route::get("/contacts/{contactId}", [ContactController::class, "destroy"])
         ->name("destroy");

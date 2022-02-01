@@ -57,7 +57,6 @@ class ContactController extends Controller
 
         $time = strtotime($birthDate);
         $parsedDate = date("Y-m-d", $time);
-
         $createdContact->first_name = $firstName;
         $createdContact->middle_name = $middleName;
         $createdContact->last_name = $lastName;
@@ -72,8 +71,13 @@ class ContactController extends Controller
 
     function edit($contactId)
     {
-        $retrievedContact = Contact::find($contactId);
+        $retrievedContact = Contact::find($contactId);        
         return view("pages.create-contact")->with("retrievedContact", $retrievedContact);
+    }
+
+    function update()
+    {
+        echo "Hola mundo";
     }
 
     function destroy($contactId)
