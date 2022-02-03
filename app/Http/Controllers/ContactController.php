@@ -75,9 +75,46 @@ class ContactController extends Controller
         return view("pages.create-contact")->with("retrievedContact", $retrievedContact);
     }
 
-    function update()
+    function update(StoreContactRequest $request, $contactId)
     {
-        echo "Hola mundo";
+        $validatedData = $request->validated();
+        $retrievedContact = Contact::find($contactId);
+        $firstName = $validatedData["firstName"];
+        $middleName = $validatedData["middleName"];
+        $lastName = $validatedData["lastName"];
+        $birthDate = $validatedData["birthDate"];
+        $emailAddress = $validatedData["emailAddress"];
+
+        $phoneNumbers = [
+            [
+                "phone_number_type" => PhoneNumber::PHONE_HOME,
+                "number" => $validatedData["homePhone"]
+            ],
+            [
+                "phone_number_type" => PhoneNumber::PHONE_MOBILE,
+                "number" => $validatedData["mobilePhone"]
+            ],
+            [
+                "phone_number_type" => PhoneNumber::PHONE_WORK,
+                "number" => $validatedData["workPhone"]
+            ],
+        ];
+
+        $filledPhoneNumbers = array_filter($phoneNumbers, function($phoneNumber) {
+            return !is_null($phoneNumber["number"]);
+        });
+
+        $time = strtotime($birthDate);
+        $parsedDate = date("Y-m-d", $time);
+        $retrievedContact->first_name = $firstName;
+        $retrievedContact->middle_name = $middleName;
+        $retrievedContact->last_name = $lastName;
+        $retrievedContact->birth_date = $parsedDate;
+        $retrievedContact->email_address = $emailAddress;        
+        $retrievedContact->phoneNumbers()->createMany($filledPhoneNumbers);
+        $retrievedContact->save();
+
+        return redirect()->route("contacts.index")->with("successMessage", "Contacto actualizado correctamente");        
     }
 
     function destroy($contactId)

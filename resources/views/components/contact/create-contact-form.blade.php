@@ -1,5 +1,5 @@
 <form
-    action="{{ request()->routeIs('contacts.create') ? route('contacts.store') : route('contacts.update', 1) }}"
+    action="{{ request()->routeIs('contacts.create') ? route('contacts.store') : route('contacts.update', $contactId) }}"
     class="bg-white p-3 p-md-5 shadow-sm"
     method="POST">
     @csrf

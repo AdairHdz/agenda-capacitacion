@@ -15,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 require_once "contacts/contacts-routes.php";
 require_once "events/events-routes.php";
+
+Route::get("/", function() {
+    return redirect()->route("contacts.index");
+});

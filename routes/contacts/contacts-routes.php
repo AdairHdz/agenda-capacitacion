@@ -2,6 +2,22 @@
 
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Models\Contact;
+
+Route::get("/contacts/search", function(Request $request) {
+    $retrievedContactsWithGivenFirstName = [];
+    if($request->filled("firstName"))
+    {        
+        $firstName = $request->input("firstName");
+        $retrievedContactsWithGivenFirstName = Contact::where("first_name", "like", "%$firstName%")->get();
+    }
+    else
+    {
+        $retrievedContactsWithGivenFirstName = Contact::all();
+    }
+    return response()->json($retrievedContactsWithGivenFirstName);
+});
 
 Route::name("contacts.")->group(function() {
     Route::get("/contacts", [ContactController::class, "index"])
