@@ -5,7 +5,7 @@
     </div>
     @endisset
     <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 p-0">
-        <form class="row bg-white mb-5 p-5" method="" action="">
+        <form class="row bg-white mb-5 p-5" method="GET" action="">
             <div class="row">
                 <div class="col-12">
                     <label for="status">Mostrar</label>
@@ -35,7 +35,12 @@
         <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 position-relative">
             @isset($retrievedEvents)
             @forelse ($retrievedEvents as $event)
-            <p>Evento</p>
+            <x-event.event-item-overview
+                eventId="{{$event->id}}"
+                eventName="{{$event->title}}"
+                eventStartingDate="{{$event->starting_date}} {{$event->starting_time}}"
+                eventEndingDate="{{$event->ending_date}} {{$event->ending_time}}"
+                eventStatus="{{$event->status}}"/>
             @empty
             <p>No hay eventos</p>
             @endforelse

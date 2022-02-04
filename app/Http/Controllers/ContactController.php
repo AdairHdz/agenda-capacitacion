@@ -10,8 +10,17 @@ use Illuminate\Support\Facades\Session;
 
 class ContactController extends Controller
 {
-    function index()
+    function index(Request $request)
     {
+        if($request->filled("search"))
+        {
+            $search = $request->get("search");
+            $retrievedContacts = Contact::where("first_name", "like", "%$search%")
+                ->get();
+            return view("pages.home")
+                ->with("retrievedContacts", $retrievedContacts);
+        }
+
         $retrievedContacts = Contact::all();
         $successMessage = Session::get("successMessage");
         if(isset($successMessage)) {

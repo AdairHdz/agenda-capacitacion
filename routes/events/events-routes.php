@@ -15,4 +15,8 @@ Route::name("events.")->group(function() {
     
     Route::put("/events/{eventId}", [EventController::class, "update"])
         ->name("update");
+    
+    Route::get("/events/{eventId}/edit", [EventController::class, "edit"])->name("edit");
+
+    Route::get("/events/{eventId}", [EventController::class, "destroy"])->name("destroy");
 });
